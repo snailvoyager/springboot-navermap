@@ -26,7 +26,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter
 	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
-
+	//thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 }
 
 tasks.named('test') {
