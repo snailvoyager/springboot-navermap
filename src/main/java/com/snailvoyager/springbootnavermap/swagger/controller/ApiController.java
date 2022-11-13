@@ -1,6 +1,6 @@
-package com.snailvoyager.springbootnavermap.controller;
+package com.snailvoyager.springbootnavermap.swagger.controller;
 
-import com.snailvoyager.springbootnavermap.dto.User;
+import com.snailvoyager.springbootnavermap.swagger.dto.User;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.snailvoyager.springbootnavermap.dto;
+package com.snailvoyager.springbootnavermap.swagger.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

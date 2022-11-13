@@ -1,12 +1,13 @@
-package com.snailvoyager.springbootnavermap.component;
+package com.snailvoyager.springbootnavermap.swagger.component;
 
+import com.snailvoyager.springbootnavermap.swagger.component.Calculator;
+import com.snailvoyager.springbootnavermap.swagger.component.MarketApi;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 
 @SpringBootTest     //통합테스트로 모든 bean 객체 사용 가능
 public class DollarCalculatorTest {

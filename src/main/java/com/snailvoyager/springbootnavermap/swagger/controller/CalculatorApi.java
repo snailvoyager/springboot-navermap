@@ -1,8 +1,8 @@
-package com.snailvoyager.springbootnavermap.controller;
+package com.snailvoyager.springbootnavermap.swagger.controller;
 
-import com.snailvoyager.springbootnavermap.component.Calculator;
-import com.snailvoyager.springbootnavermap.dto.Req;
-import com.snailvoyager.springbootnavermap.dto.Res;
+import com.snailvoyager.springbootnavermap.swagger.component.Calculator;
+import com.snailvoyager.springbootnavermap.swagger.dto.Req;
+import com.snailvoyager.springbootnavermap.swagger.dto.Res;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

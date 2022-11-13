@@ -1,4 +1,4 @@
-package com.snailvoyager.springbootnavermap.component;
+package com.snailvoyager.springbootnavermap.swagger.component;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

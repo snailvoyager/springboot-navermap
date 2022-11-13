@@ -1,4 +1,4 @@
-package com.snailvoyager.springbootnavermap.component;
+package com.snailvoyager.springbootnavermap.swagger.component;
 
 public interface ICalculator {
     int sum(int x, int y);

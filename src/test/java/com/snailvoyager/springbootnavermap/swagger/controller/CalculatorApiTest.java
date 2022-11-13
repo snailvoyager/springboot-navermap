@@ -1,10 +1,11 @@
-package com.snailvoyager.springbootnavermap.controller;
+package com.snailvoyager.springbootnavermap.swagger.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.snailvoyager.springbootnavermap.component.Calculator;
-import com.snailvoyager.springbootnavermap.component.DollarCalculator;
-import com.snailvoyager.springbootnavermap.component.MarketApi;
-import com.snailvoyager.springbootnavermap.dto.Req;
+import com.snailvoyager.springbootnavermap.swagger.component.Calculator;
+import com.snailvoyager.springbootnavermap.swagger.component.DollarCalculator;
+import com.snailvoyager.springbootnavermap.swagger.component.MarketApi;
+import com.snailvoyager.springbootnavermap.swagger.controller.CalculatorApi;
+import com.snailvoyager.springbootnavermap.swagger.dto.Req;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
