@@ -2,6 +2,7 @@ package com.snailvoyager.springbootnavermap.naver;
 
 import com.snailvoyager.springbootnavermap.naver.dto.SearchImageReq;
 import com.snailvoyager.springbootnavermap.naver.dto.SearchLocalReq;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,7 @@ public class NaverClientTest {
 
         var result = naverClient.searchLocal(search);
         System.out.println(result);
+        Assertions.assertThat(result.getItems().stream().findFirst().get().getCategory()).isNotNull();
     }
 
     @Test
