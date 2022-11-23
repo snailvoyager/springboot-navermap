@@ -107,7 +107,7 @@ public class WishListService {
             var item = wishItem.get();
             item.setVisit(true);
             item.setVisitCount(item.getVisitCount()+1);
-
+            wishListRepository.save(item);
         }
     }
 }

@@ -1,16 +1,23 @@
 package com.snailvoyager.springbootnavermap.restaurant.wishlist.entity;
 
-import com.snailvoyager.springbootnavermap.restaurant.db.MemoryDbEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class WishListEntity extends MemoryDbEntity {
+@Entity
+@Table(name = "WishList")
+@SequenceGenerator(name="RES_SEQ_GEN", sequenceName = "RES_SEQ", initialValue = 1, allocationSize = 1)
+public class WishListEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RES_SEQ_GEN")
+    private Integer index;
+
     private String title;
     private String category;
     private String address;
