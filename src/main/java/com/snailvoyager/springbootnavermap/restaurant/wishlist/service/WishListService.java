@@ -5,6 +5,7 @@ import com.snailvoyager.springbootnavermap.naver.dto.SearchImageReq;
 import com.snailvoyager.springbootnavermap.naver.dto.SearchLocalReq;
 import com.snailvoyager.springbootnavermap.restaurant.wishlist.dto.WishListDto;
 import com.snailvoyager.springbootnavermap.restaurant.wishlist.entity.WishListEntity;
+import com.snailvoyager.springbootnavermap.restaurant.wishlist.mapper.WishListMapper;
 import com.snailvoyager.springbootnavermap.restaurant.wishlist.repository.WishListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -54,9 +55,9 @@ public class WishListService {
     }
 
     public WishListDto add(WishListDto wishListDto) {
-        var entity = dtoToEntity(wishListDto);
+        var entity = WishListMapper.INSTANCE.toEntity(wishListDto);
         var saveEntity = wishListRepository.save(entity);
-        return entityToDto(saveEntity);
+        return WishListMapper.INSTANCE.toDto(saveEntity);
     }
 
     private WishListEntity dtoToEntity(WishListDto wishListDto) {
@@ -93,7 +94,7 @@ public class WishListService {
     public List<WishListDto> findAll() {
         return wishListRepository.findAll()
                 .stream()
-                .map(this::entityToDto)
+                .map(WishListMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
     }
 
