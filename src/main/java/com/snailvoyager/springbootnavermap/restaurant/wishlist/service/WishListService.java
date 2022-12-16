@@ -111,4 +111,8 @@ public class WishListService {
             wishListRepository.save(item);
         }
     }
+
+    public void deleteAll() {
+        wishListRepository.deleteAll();
+    }
 }
