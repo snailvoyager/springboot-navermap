@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,10 +64,12 @@ public class WishListServiceTest {
         WishListDto wishListDto = new WishListDto();
         wishListDto.setTitle("TestTitle");
         wishListDto.setRoadAddress("TestRoadAddress");
+        wishListDto.setLastVisitDate(LocalDateTime.now());
         var expected = wishListService.add(wishListDto);
         assertThat(expected).isNotNull();
         assertThat(expected.getTitle()).isEqualTo("TestTitle");
         assertThat(expected.getRoadAddress()).isEqualTo("TestRoadAddress");
+        assertThat(expected.getLastVisitDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))).isEqualTo(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.snailvoyager.springbootnavermap.restaurant.wishlist.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -26,5 +27,6 @@ public class WishListEntity {
     private String imageLink;
     private boolean isVisit;
     private int visitCount;
+    @UpdateTimestamp
     private LocalDateTime lastVisitDate;
 }
