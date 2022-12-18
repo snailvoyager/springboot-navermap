@@ -6,5 +6,5 @@ import com.snailvoyager.springbootnavermap.restaurant.reviewlist.entity.ReviewEn
 import java.util.List;
 
 public interface ReviewRepositoryCustom {
-    List<ReviewEntity> findByWishListId(ReviewDto reviewDto);
+    List<ReviewEntity> findByWriter(ReviewDto reviewDto);
 }

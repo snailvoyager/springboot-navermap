@@ -6,6 +6,9 @@ import com.snailvoyager.springbootnavermap.restaurant.reviewlist.repository.Revi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
@@ -15,5 +18,12 @@ public class ReviewService {
         var entity = ReviewMapper.INSTANCE.toEntity(reviewDto);
         var saveEntity = reviewRepository.save(entity);
         return ReviewMapper.INSTANCE.toDto(saveEntity);
+    }
+
+    public List<ReviewDto> findByWriter(ReviewDto reviewDto) {
+        var result =  reviewRepository.findByWriter(reviewDto);
+        return result.stream()
+                .map(ReviewMapper.INSTANCE::toDto)
+                .collect(Collectors.toList());
     }
 }

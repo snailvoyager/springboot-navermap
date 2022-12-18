@@ -24,4 +24,10 @@ public class ReviewController {
     public ReviewDto add(@RequestBody ReviewDto reviewDto) {
         return reviewService.add(reviewDto);
     }
+
+    @GetMapping("/writer")
+    public List<ReviewDto> findByWriter(@RequestParam String writer) {
+        ReviewDto reviewDto = ReviewDto.builder().writer(writer).build();
+        return reviewService.findByWriter(reviewDto);
+    }
 }
