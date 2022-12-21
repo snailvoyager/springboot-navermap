@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @NoArgsConstructor
@@ -22,6 +23,10 @@ public class ReviewEntity {
     private int wishListId;
     private String writer;
     private String comment;
+    @Temporal(TemporalType.DATE)    //YYYY-MM-DD
+    private Date beginDate;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
     @CreationTimestamp
     private LocalDateTime createDate;
     @UpdateTimestamp
