@@ -67,15 +67,23 @@ class ReviewRepositoryImplTest {
                 .beginDate(Date.from(LocalDate.of(2022,12,1).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .endDate(Date.from(LocalDate.of(2022,12,30).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
+        ReviewEntity entity2 = ReviewEntity.builder()
+                .id(2L)
+                .beginDate(Date.from(LocalDate.now().minusDays(10).atStartOfDay(ZoneId.systemDefault()).toInstant()))
+                .endDate(Date.from(LocalDate.now().plusDays(10).atStartOfDay(ZoneId.systemDefault()).toInstant()))
+                .build();
 
-        var saveEntity = reviewRepository.save(entity);
+        reviewRepository.save(entity);
+        reviewRepository.save(entity2);
+
         ReviewEntity reviewEntity = jpaQueryFactory
                 .select(e)
                 .from(e)
                 .where(Expressions.currentDate().between(e.beginDate, e.endDate))
                 .fetchOne();
 
-        assertThat(saveEntity.getId()).isEqualTo(1L);
+        assert reviewEntity != null;
+        assertThat(reviewEntity.getId()).isEqualTo(2L);
     }
 
 }
