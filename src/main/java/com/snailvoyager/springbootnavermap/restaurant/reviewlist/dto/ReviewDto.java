@@ -1,14 +1,14 @@
 package com.snailvoyager.springbootnavermap.restaurant.reviewlist.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReviewDto {
     private Long id;
     private int wishListId;

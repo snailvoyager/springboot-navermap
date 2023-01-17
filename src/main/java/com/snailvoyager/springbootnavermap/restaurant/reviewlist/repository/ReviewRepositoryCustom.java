@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ReviewRepositoryCustom {
     List<ReviewEntity> findByWriter(ReviewDto reviewDto);
+
+    List<ReviewDto> findReviewByWriterUsingProjections(ReviewDto reviewDto);
 }

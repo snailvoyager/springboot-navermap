@@ -1,5 +1,6 @@
 package com.snailvoyager.springbootnavermap.restaurant.reviewlist.repository;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.snailvoyager.springbootnavermap.restaurant.reviewlist.dto.ReviewDto;
 import com.snailvoyager.springbootnavermap.restaurant.reviewlist.entity.QReviewEntity;
@@ -19,6 +20,18 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom{
 
         return jpaQueryFactory
                 .select(review)
+                .from(review)
+                .where(review.writer.eq(reviewDto.getWriter()))
+                .fetch();
+    }
+
+    @Override
+    public List<ReviewDto> findReviewByWriterUsingProjections(ReviewDto reviewDto) {
+        QReviewEntity review = QReviewEntity.reviewEntity;
+        return jpaQueryFactory
+                .select(Projections.fields(ReviewDto.class,
+                        review.id,
+                        review.wishListId))
                 .from(review)
                 .where(review.writer.eq(reviewDto.getWriter()))
                 .fetch();

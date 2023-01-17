@@ -1,8 +1,10 @@
 package com.snailvoyager.springbootnavermap.restaurant.reviewlist.repository;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.snailvoyager.springbootnavermap.restaurant.reviewlist.dto.ReviewDto;
 import com.snailvoyager.springbootnavermap.restaurant.reviewlist.entity.QReviewEntity;
 import com.snailvoyager.springbootnavermap.restaurant.reviewlist.entity.ReviewEntity;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +17,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -84,6 +88,34 @@ class ReviewRepositoryImplTest {
 
         assert reviewEntity != null;
         assertThat(reviewEntity.getId()).isEqualTo(2L);
+    }
+
+    @Test
+    void test_findReviewByWriterReturnDto() {
+        QReviewEntity review = QReviewEntity.reviewEntity;
+
+        ReviewEntity entity = ReviewEntity.builder()
+                .id(1L)
+                .writer("test")
+                .comment("asldkjfsdjf")
+                .createDate(LocalDateTime.of(2023, 1, 17, 21, 30))
+                .build();
+
+        reviewRepository.save(entity);
+
+        ReviewDto reviewDto = jpaQueryFactory
+                .select(Projections.fields(ReviewDto.class,
+                        review.id,
+                        review.wishListId,
+                        review.createDate,
+                        review.updateDate))
+                .from(review)
+                .where(review.writer.eq("test"))
+                .fetchOne();
+
+        assertThat(reviewDto.getId()).isEqualTo(1L);
+        assertThat(reviewDto.getCreateDate().getMonth()).isEqualTo(Month.JANUARY);
+        assertThat(reviewDto.getCreateDate().getDayOfMonth()).isEqualTo(17);
     }
 
 }
