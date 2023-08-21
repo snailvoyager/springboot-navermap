@@ -4,27 +4,25 @@ import com.snailvoyager.springbootnavermap.restaurant.reviewlist.dto.ReviewDto;
 import com.snailvoyager.springbootnavermap.restaurant.reviewlist.entity.ReviewEntity;
 import com.snailvoyager.springbootnavermap.restaurant.reviewlist.mapper.ReviewMapper;
 import com.snailvoyager.springbootnavermap.restaurant.reviewlist.repository.ReviewRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class ReviewServiceTest {
+    @InjectMocks
     private ReviewService reviewService;
 
     @Mock
     private ReviewRepository reviewRepository;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        reviewService = new ReviewService(reviewRepository);
-    }
 
     @Test
     void test_add() {
