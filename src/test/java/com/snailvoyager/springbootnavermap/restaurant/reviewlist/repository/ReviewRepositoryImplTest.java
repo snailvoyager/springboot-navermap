@@ -1,20 +1,18 @@
 package com.snailvoyager.springbootnavermap.restaurant.reviewlist.repository;
 
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.snailvoyager.springbootnavermap.restaurant.reviewlist.dto.ReviewDto;
 import com.snailvoyager.springbootnavermap.restaurant.reviewlist.entity.QReviewEntity;
 import com.snailvoyager.springbootnavermap.restaurant.reviewlist.entity.ReviewEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
