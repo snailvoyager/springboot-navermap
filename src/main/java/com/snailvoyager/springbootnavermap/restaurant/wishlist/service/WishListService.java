@@ -1,6 +1,6 @@
 package com.snailvoyager.springbootnavermap.restaurant.wishlist.service;
 
-import com.snailvoyager.springbootnavermap.naver.NaverClient;
+import com.snailvoyager.springbootnavermap.naver.NaverFeignClient;
 import com.snailvoyager.springbootnavermap.naver.dto.SearchImageReq;
 import com.snailvoyager.springbootnavermap.naver.dto.SearchLocalReq;
 import com.snailvoyager.springbootnavermap.restaurant.wishlist.dto.WishListDto;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WishListService {
 
-    private final NaverClient naverClient;
+    private final NaverFeignClient naverFeignClient;
     private final WishListRepository wishListRepository;
 
     public WishListDto search(String query) {
@@ -25,7 +25,7 @@ public class WishListService {
         var searchLocalReq = new SearchLocalReq();
         searchLocalReq.setQuery(query);
 
-        var searchLocalRes = naverClient.searchLocal(searchLocalReq);
+        var searchLocalRes = naverFeignClient.searchLocal(searchLocalReq);
 
         if (searchLocalRes.getTotal() > 0) {
             var localItem = searchLocalRes.getItems().stream().findFirst().get();
@@ -35,7 +35,7 @@ public class WishListService {
             searchImageReq.setQuery(imageQuery);
 
             //image
-            var searchImageRes = naverClient.searchImage(searchImageReq);
+            var searchImageRes = naverFeignClient.searchImage(searchImageReq);
 
             if (searchImageRes.getTotal() > 0) {
                 var imageItem = searchImageRes.getItems().stream().findFirst().get();

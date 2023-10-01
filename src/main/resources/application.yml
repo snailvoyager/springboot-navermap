@@ -17,6 +17,12 @@ spring:
     url: jdbc:h2:mem:testdb  # H2 접속 정보
     username: sa  # H2 접속 시 입력할 username 정보 (원하는 것으로 입력)
     password:
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            logger-level: full
 
 naver:
   url:
@@ -26,3 +32,7 @@ naver:
   client:
     id: uWNPYItMQRRryVqw2KpN
     secret: BdOft6BI6A
+
+logging:
+  level:
+    com.snailvoyager.springbootnavermap.naver.NaverFeignClient: debug
