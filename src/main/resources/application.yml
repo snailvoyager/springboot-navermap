@@ -22,9 +22,12 @@ spring:
       client:
         config:
           default:
+            connect-timeout: 2000
+            read-timeout: 5000
             logger-level: full
 
 naver:
+  openapi-url: https://openapi.naver.com
   url:
     search:
       local: https://openapi.naver.com/v1/search/local.json
