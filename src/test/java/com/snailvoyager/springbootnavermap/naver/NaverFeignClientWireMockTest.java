@@ -35,7 +35,10 @@ class NaverFeignClientWireMockTest {
         var search = new SearchLocalReq();
         search.setQuery("갈비집");
 
-        assertThatThrownBy(() -> naverFeignClient.searchLocal(search)).isInstanceOf(RetryableException.class).hasMessageContaining("Read timed out");
+        //assertThatThrownBy(() -> naverFeignClient.searchLocal(search)).isInstanceOf(RetryableException.class).hasMessageContaining("Read timed out");
+        var result = naverFeignClient.searchLocal(search);
+        assertThat(result).isNotNull();
+        assertThat(result.getTotal()).isEqualTo(0);
     }
 
     @Test

@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient(name = "naver", url = "${naver.openapi-url}", configuration = NaverFeignConfig.class)
+@FeignClient(name = "naver", url = "${naver.openapi-url}", configuration = NaverFeignConfig.class, fallbackFactory = NaverFeignClientFallback.class)
 public interface NaverFeignClient {
     @GetMapping(value = "/v1/search/local.json")
     SearchLocalRes searchLocal(@SpringQueryMap SearchLocalReq searchLocalReq);

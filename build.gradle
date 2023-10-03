@@ -57,6 +57,8 @@ dependencies {
 	//openfeign
 	implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
 	testImplementation("org.springframework.cloud:spring-cloud-contract-wiremock")
+	//resilience4j
+	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
 }
 
 tasks.named('test') {
