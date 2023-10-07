@@ -18,7 +18,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureWireMock(port = 0)
 @TestPropertySource(properties = {
         "naver.openapi-url=http://localhost:${wiremock.server.port}",
-        "resilience4j.circuitbreaker.configs.default.minimumNumberOfCalls=10"
+        "resilience4j.circuitbreaker.configs.default.minimumNumberOfCalls=10",
+        "resilience4j.circuitbreaker.configs.default.slowCallDurationThreshold=3s"
 })
 @ExtendWith(SpringExtension.class)
 class NaverFeignClientWireMockTest {
@@ -82,9 +83,52 @@ class NaverFeignClientWireMockTest {
         search.setQuery("갈비집");
 
         for (int i=0; i<20; i++) {
-            var result = naverFeignClient.searchLocal(search);
+            var result = naverFeignClient.searchLocal(search);      //10번째까지 500서버 에러로 FeignException, 11번째부터는 circuit breaker open 으로 CallNotPermittedException
             assertThat(result).isNotNull();
             assertThat(result.getTotal()).isEqualTo(0);
+        }
+    }
+
+    @Test
+    void searchLocalResilience4jTest_whenServerDelay_thenTimeout() {
+        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/v1/search/local.json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.OK_200)
+                        .withFixedDelay(4000)       //slowCallDurationThreshold 3초 설정으로 slow 카운팅
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\n" +
+                                "\t\"lastBuildDate\":\"Sun, 01 Oct 2023 23:31:58 +0900\",\n" +
+                                "\t\"total\":1,\n" +
+                                "\t\"start\":1,\n" +
+                                "\t\"display\":1,\n" +
+                                "\t\"items\":[\n" +
+                                "\t\t{\n" +
+                                "\t\t\t\"title\":\"몽탄2\",\n" +
+                                "\t\t\t\"link\":\"http:\\/\\/www.mongtan.co.kr\",\n" +
+                                "\t\t\t\"category\":\"한식>육류,고기요리\",\n" +
+                                "\t\t\t\"description\":\"\",\n" +
+                                "\t\t\t\"telephone\":\"\",\n" +
+                                "\t\t\t\"address\":\"서울특별시 용산구 한강로1가 251-1\",\n" +
+                                "\t\t\t\"roadAddress\":\"서울특별시 용산구 백범로99길 50\",\n" +
+                                "\t\t\t\"mapx\":\"1269722500\",\n" +
+                                "\t\t\t\"mapy\":\"375360103\"\n" +
+                                "\t\t}\n" +
+                                "\t]\n" +
+                                "}")));
+
+        var search = new SearchLocalReq();
+        search.setQuery("갈비집");
+
+        for (int i=0; i<20; i++) {
+            var result = naverFeignClient.searchLocal(search);
+
+            if (i < 10) {   //10번째까지는 circuit breaker closed
+                assertThat(result).isNotNull();
+                assertThat(result.getTotal()).isEqualTo(1);
+            } else {    //11번째부터 circuit breaker open
+                assertThat(result).isNotNull();
+                assertThat(result.getTotal()).isEqualTo(0);
+            }
         }
     }
 
