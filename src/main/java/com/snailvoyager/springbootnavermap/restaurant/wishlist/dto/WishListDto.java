@@ -22,4 +22,5 @@ public class WishListDto {
     private boolean isVisit;
     private int visitCount;
     private LocalDateTime lastVisitDate;
+    private String sameFieldName;
 }

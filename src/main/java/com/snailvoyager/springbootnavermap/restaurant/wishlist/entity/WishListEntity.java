@@ -29,4 +29,5 @@ public class WishListEntity {
     private int visitCount;
     @UpdateTimestamp
     private LocalDateTime lastVisitDate;
+    private int sameFieldName;
 }
