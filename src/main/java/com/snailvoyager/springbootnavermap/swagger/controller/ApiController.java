@@ -1,7 +1,9 @@
 package com.snailvoyager.springbootnavermap.swagger.controller;
 
 import com.snailvoyager.springbootnavermap.swagger.dto.User;
+import com.snailvoyager.springbootnavermap.swagger.dto.UserRecord;
 import io.swagger.annotations.Api;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,11 @@ public class ApiController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)      //201
                 .body(user);
+    }
+
+    @GetMapping("/user2")
+    public ResponseEntity<UserRecord> model(@Valid @ModelAttribute UserRecord userRecord) {
+        return ResponseEntity.ok(userRecord);
     }
 
 }
